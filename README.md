@@ -14,6 +14,8 @@ go get github.com/jim-minter/gotemplate
 $GOPATH/bin/gotemplate
 ```
 
+(alternatively a [pre-compiled binary for Linux x86_64](bin/gotemplate) is checked in - caveat emptor)
+
 ## Documentation
 
 Golang's text/template capabilities are powerful and are fully documented at
