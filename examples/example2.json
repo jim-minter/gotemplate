@@ -1,0 +1,16 @@
+{
+    "people": [
+	{
+	    "name": "alice",
+	    "number": 123
+	},
+	{
+	    "name": "bob",
+	    "number": 456
+	},
+	{
+	    "name": "<eve>",
+	    "number": 789
+	}
+    ]
+}

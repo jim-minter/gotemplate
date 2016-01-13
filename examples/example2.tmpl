@@ -1,0 +1,6 @@
+<addressbook>
+{{range $person := .people}}
+  <name>{{html $person.name}}</name>
+  <number>{{html $person.number}}</number>
+{{end}}
+</addressbook>

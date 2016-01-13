@@ -1,0 +1,19 @@
+{{/* this is a comment */}}
+
+{{/* print the value of $HOME */}}
+The value of $HOME is {{ .env.HOME }}.
+
+{{/* print all the environment variables */}}
+The following environment variables are set:{{range $key, $value := .env}}
+- {{$key}}: {{$value}}{{end}}
+
+{{/* test an environment variable */}}
+{{if eq .env.SHELL "/bin/bash"}}
+Your shell is /bin/bash!
+{{else}}
+Your shell is not /bin/bash!
+{{end}}
+
+{{/* print an undefined environment variable.  Modify the behaviour with the
+     -missingkey option (valid options: default, invalid, zero, error) */}}
+The value of $DOESNOTEXIST is {{ .env.DOESNOTEXIST }}.
