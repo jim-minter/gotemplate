@@ -1,0 +1,2 @@
+There are {{ len (split .env.PATH ":") }} elements in your PATH.  They are: {{range $x := split .env.PATH ":"}}
+- {{$x}}{{end}}

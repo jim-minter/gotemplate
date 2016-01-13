@@ -30,6 +30,45 @@ var jsonfile string
 var yamlfile string
 var missingkey string
 
+// setFuncs imports certain functions from the Golang API to make them
+// available to templates
+func setFuncs(t *template.Template) {
+	t.Funcs(template.FuncMap{
+		"contains": strings.Contains,
+		"containsAny": strings.ContainsAny,
+		"containsRune": strings.ContainsRune,
+		"count": strings.Count,
+		"equalFold": strings.EqualFold,
+		"fields": strings.Fields,
+		"hasPrefix": strings.HasPrefix,
+		"hasSuffix": strings.HasSuffix,
+		"index": strings.Index,
+		"indexAny": strings.IndexAny,
+		"indexByte": strings.IndexByte,
+		"indexRune": strings.IndexRune,
+		"join": strings.Join,
+		"lastIndex": strings.LastIndex,
+		"lastIndexAny": strings.LastIndexAny,
+		"lastIndexByte": strings.LastIndexByte,
+		"repeat": strings.Repeat,
+		"replace": strings.Replace,
+		"split": strings.Split,
+		"splitAfter": strings.SplitAfter,
+		"splitAfterN": strings.SplitAfterN,
+		"splitN": strings.SplitN,
+		"title": strings.Title,
+		"toLower": strings.ToLower,
+		"toTitle": strings.ToTitle,
+		"toUpper": strings.ToUpper,
+		"trim": strings.Trim,
+		"trimLeft": strings.TrimLeft,
+		"trimPrefix": strings.TrimPrefix,
+		"trimRight": strings.TrimRight,
+		"trimSpace": strings.TrimSpace,
+		"trimSuffix": strings.TrimSuffix,
+	})
+}
+
 // readFile reads in a given file and unmarshals it according to the passed
 // function pointer
 func readFile(name string, unmarshal func([]byte, interface{}) error) (map[string]interface{}, error) {
@@ -99,9 +138,12 @@ func main() {
 	// parse command line arguments
 	parseArgs()
 
-	// read in specified template files
 	_, name := path.Split(flag.Args()[0])
-	t, err := template.New(name).ParseFiles(flag.Args()...)
+	t := template.New(name)
+	setFuncs(t)
+
+	// read in specified template files
+	t, err := t.ParseFiles(flag.Args()...)
 	checkError(err)
 
 	// populate template data if available
